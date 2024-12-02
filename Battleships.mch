@@ -21,6 +21,7 @@ INITIALISATION
 OPERATIONS
    PlaceWarship(player, x, y) =
    PRE
+    people: PEOPLE
        
 
 END
