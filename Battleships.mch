@@ -14,14 +14,19 @@ VARIABLES
     warship_positions
 INVARIANT
     warship_positions: PLAYER --> POW1(1..grid_size * 1..grid_size) &
-    !p.(p:PLAYERcard(warship_positions(p) =3) &
-    !p1, p2.(p1:PLAYER & p2:PLAYER & p1 /= p2 => warship_positions(p1) /\         warship_positions(p2) = {})
+    !p.(p:PLAYER => card(warship_positions(p)) = 3) &
+    !(p1, p2).(p1:PLAYER & p2:PLAYER & p1 /= p2 => (warship_positions(p1) /\ warship_positions(p2)) = {})
 INITIALISATION
     warship_positions := {Player1 |-> {}, Player2 |-> {}}
 OPERATIONS
    PlaceWarship(player, x, y) =
    PRE
-    people: PEOPLE
-       
+    people: PEOPLE &
+    x: 1..GRIDE_SIZE &
+    y: 1..GRIDE_SIZE &
+    (x, y) /: union(ran(warship_positions))
+THEN
+    warship_positions(player) := warship_positions(player) \/ {(x,y)}
+    
 
 END
