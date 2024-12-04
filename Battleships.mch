@@ -21,12 +21,8 @@ INITIALISATION
 OPERATIONS
    PlaceWarship(player, x, y) =
    PRE
-    people: PEOPLE &
-    x: 1..GRIDE_SIZE &
-    y: 1..GRIDE_SIZE &
-    (x, y) /: union(ran(warship_positions))
-THEN
-    warship_positions(player) := warship_positions(player) \/ {(x,y)}
-    
-
+    player:PLAYER & x: 1..grid_size & y: 1..grid_size & (x, y) /: union(ran(warship_positions))
+    THEN
+        warship_positions(player) := warship_positions(player) \/ {(x,y)}
+    END;
 END
